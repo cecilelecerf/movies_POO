@@ -60,7 +60,7 @@ if (empty($movie->getId())) {
                 </p>
             </div>
 
-            <button type="submit" name="updateStudent" class="btn btn-primary">Valider</button>
+            <button type="submit" name="updateMovie" class="btn btn-primary">Valider</button>
 
         </form>
     </main>

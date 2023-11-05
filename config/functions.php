@@ -15,3 +15,9 @@ function flash_out()
 
     $_SESSION['message'] = [];
 }
+
+function addMovie()
+{ ?>
+
+<?php
+}

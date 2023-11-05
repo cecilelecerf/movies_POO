@@ -38,28 +38,6 @@ require("config/settings.php");
                 <?php endforeach ?>
             </tbody>
         </table>
-
-        <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post" class="container my-5">
-            <h1 class="border-top pt-4">Ajouter un étudiant</h1>
-            <div class="d-flex">
-                <p class="w-50 pe-2">
-                    <input type="text" placeholder="Prénom" name="firstname" class="form-control">
-                </p>
-
-                <p class="w-50 ps-2">
-                    <input type="text" placeholder="Nom de famille" name="lastname" class="form-control">
-                </p>
-            </div>
-            <p>
-                <input type="date" placeholder="Votre Anniversaire" name="birthday" class="form-control">
-            </p>
-            <p>
-                <input type="text" placeholder="Spécialité" name="major" class="form-control">
-            </p>
-            <button type="submit" name="addStudent" class="btn btn-primary">Valider</button>
-
-        </form>
-
     </main>
 
     <?php include("partials/footer.php") ?>
