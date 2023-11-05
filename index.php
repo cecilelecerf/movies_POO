@@ -11,10 +11,8 @@ require("config/settings.php");
 </head>
 
 <body>
-
     <?php include("partials/header.php") ?>
     <main class="container">
-
         <?php $all = Gender::all(); ?>
         <article class="allGender">
 
@@ -36,7 +34,6 @@ require("config/settings.php");
                 <input type="text" placeholder="Nom de la catégorie" name="name" class="form-control">
             </p>
             <button type="submit" name="addGender" class="btn btn-primary">Valider</button>
-
         </form>
 
     </main>

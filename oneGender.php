@@ -54,25 +54,38 @@ if (empty($gender->getId())) {
         <?php endif ?>
         <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post" class="container my-5">
             <h1 class="border-top pt-4">Ajouter un film</h1>
-
             <p>
                 <input type="hidden" name="gender_id" class="form-control" value="<?= $gender->getId() ?>">
             </p>
-
-            <p class="w-50 pe-2">
+            <p>
                 <input type="text" placeholder="Titre du film" name="title" class="form-control">
             </p>
-
-            <p class="w-50 ps-2">
+            <p>
                 <input type="text" placeholder="Numéro IMDB" name="imdb" class="form-control">
             </p>
-
             <button type="submit" name="addMovie" class="btn btn-primary">Valider</button>
+        </form>
 
+        <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post" class="container my-5">
+            <h1 class="border-top py-4">Modifier la catégorie</h1>
+            <input type="hidden" name="id" class="form-control" value="<?= $gender->getId() ?>">
+            <p>
+                <input type="text" placeholder="Nom de la catégorie" name="name" class="form-control" value="<?= $gender->getName() ?>">
+            </p>
+            <div class="d-flex justify-content-between">
+                <button type="submit" name="updateGender" class="btn btn-primary">Valider</button>
+                <button type="submit" name="deleteGender" class="btn btn-danger">Supprimer</button>
+            </div>
         </form>
     </main>
 
+    <footer class="bg-dark-subtle text-light pt-3">
+        <div class="container d-flex justify-content-between  ">
+            <p>Création le : <?= $gender->getCreatedAt() ?></p>
+            <p>Modification le : <?= $gender->getModifiedAt() ?></p>
+        </div>
 
+    </footer>
 </body>
 
 </html>

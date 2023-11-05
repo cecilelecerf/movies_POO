@@ -1,19 +1,20 @@
 <?php
-class Gender extends Database
+class Character extends Database
 {
     protected $id;
     protected $createdAt;
     protected $modifiedAt;
     protected $name;
+    protected $movie_id;
 
-    public function __construct($gender)
+    public function __construct($characters)
     {
         parent::__construct();
-        if (is_array($gender)) {
-            $this->hydrate($gender);
+        if (is_array($characters)) {
+            $this->hydrate($characters);
         } else {
-            $i = (int) $gender;
-            $req = $this->prepare("SELECT * FROM genders WHERE id=:id");
+            $i = (int) $characters;
+            $req = $this->prepare("SELECT * FROM characters WHERE id=:id");
             $req->execute([
                 ":id" => $i
             ]);
@@ -47,6 +48,12 @@ class Gender extends Database
             $this->name = ucfirst(strtolower($n));
     }
 
+    public function setMovie_id($n)
+    {
+        if (!empty($n))
+            $this->movie_id = (int) $n;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -64,20 +71,46 @@ class Gender extends Database
         return $this->name;
     }
 
+
+    public function getMovie_id()
+    {
+        return $this->movie_id;
+    }
+
+    public  function getMovie()
+    {
+        if (!empty($this->movie_id))
+            return new Movie($this->movie_id);
+        else
+            return null;
+    }
+
     public function __toString()
     {
-        return "Le gender a pour nom" . $this->getName();
+        return "Le group a pour nom" . $this->getName();
     }
 
     public static function all()
     {
         $db = new Database;
-        $req = $db->prepare("SELECT * FROM genders");
+        $req = $db->prepare("SELECT * FROM characters");
         $req->execute();
         $tabResult = [];
         $r = $req->fetchAll(PDO::FETCH_ASSOC);
         foreach ($r as $value) {
-            $tabResult[] = new Gender($value);
+            $tabResult[] = new Character($value);
+        }
+        return $tabResult;
+    }
+    public static function allCondition($movie_id)
+    {
+        $db = new Database;
+        $req = $db->prepare("SELECT * FROM characters WHERE movie_id=:id");
+        $req->execute([":id" => $movie_id]);
+        $tabResult = [];
+        $r = $req->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($r as $value) {
+            $tabResult[] = new Character($value);
         }
         return $tabResult;
     }
@@ -87,12 +120,13 @@ class Gender extends Database
         $isValid = true;
         if (empty($this->name)) {
             $isValid = false;
-            flash_in("danger", "Le nom du genre est obligatoire");
+            flash_in("danger", "Le nom est obligatoire");
         }
         if (strlen($this->name) > 150) {
             $isValid = false;
-            flash_in("danger", "Le nom du genre doit être inférieur à 150 caractères");
+            flash_in("danger", "Le nom doit être inférieur à 150 caractères");
         }
+
         return $isValid;
     }
 
@@ -100,12 +134,13 @@ class Gender extends Database
     public function save()
     {
         $param = [
-            ":n" => $this->getName(),
+            ":t" => $this->getName(),
+            ":g" => $this->getMovie_id(),
         ];
         if (empty($this->id)) {
-            $req = $this->prepare("INSERT INTO genders (name) VALUES (:n)");
+            $req = $this->prepare("INSERT INTO characters (name, movie_id) VALUES (:t, :g)");
         } else {
-            $req = $this->prepare("UPDATE genders SET name = :n WHERE id=:id");
+            $req = $this->prepare("UPDATE characters SET name = :t, movie_id=:g WHERE id=:id");
             $param[":id"] = $this->getId();
         }
         $req->execute($param);
@@ -113,7 +148,7 @@ class Gender extends Database
 
     public function delete()
     {
-        $req = $this->prepare("DELETE FROM genders WHERE id=:id");
+        $req = $this->prepare("DELETE FROM characters WHERE id=:id");
         $req->execute(["id" => $this->getId()]);
         return true;
     }

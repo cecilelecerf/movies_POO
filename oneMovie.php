@@ -27,7 +27,9 @@ if (empty($movie->getId())) {
             <h1 class="mb-3">
                 <?= $movie->getTitle(); ?>
                 <span class="badge text-bg-warning">
-                    <?= $movie->getGender()->getName(); ?>
+                    <a href="oneGender.php?id=<?= $movie->getGender_id(); ?>">
+                        <?= $movie->getGender()->getName(); ?>
+                    </a>
                 </span>
             </h1>
             <p>Numéro IMDB : <?= $movie->getImdb() ?></p>
@@ -36,32 +38,61 @@ if (empty($movie->getId())) {
                     -> Voir la page IMDB
                 </a>
             </p>
+            <?php $characters = Character::allCondition($movie->getId());
+            if (empty($characters)) :
+            ?>
+                <p>Le film n'a pas de personnage enregistré</p>
+            <?php else : ?>
+                <div class="allGender">
+                    <?php foreach ($characters as $character) :  ?>
+                        <h2 class="mx-3 my-3">
+                            <a href="./oneCharacter.php?id=<?= $character->getId() ?>" class=" badge text-bg-secondary rounded-pill gender">
+                                <?= $character->getName() ?>
+                            </a>
+                        </h2>
+                    <?php endforeach; ?>
+                </div>
 
-            <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post">
-                <input type="hidden" name="id" value="<?= $movie->getId() ?>">
-                <button type="submit"><i class="bi bi-x-circle"></i></button>
-            </form>
+
+            <?php endif ?>
+
         </article>
 
         <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post" class="container my-5">
-            <h1 class="border-top pt-4">Modfier <?= $movie->getTitle(); ?> </h1>
-
+            <h1 class="border-top py-4">Ajouter un personnage</h1>
             <p>
-                <input type="hidden" placeholder="Prénom" name="id" class="form-control" value="<?= $movie->getId() ?>">
+                <input type="text" placeholder="Nom du personnage" name="name" class="form-control">
             </p>
-            <div class="d-flex ">
-
-                <p class="w-50 pe-2">
-                    <input type="text" placeholder="Prénom" name="firstname" class="form-control" value="<?= $movie->getTitle() ?>">
-                </p>
-
-                <p class="w-50 ps-2">
-                    <input type="text" placeholder="Nom de famille" name="lastname" class="form-control" value="<?= $movie->getImdb() ?>">
-                </p>
+            <p>
+                <input type="hidden" placeholder="Nom du personnage" name="movie_id" class="form-control" value="<?= $movie->getId() ?>">
+            </p>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" name="addCharacter">Valider</button>
             </div>
+        </form>
 
-            <button type="submit" name="updateMovie" class="btn btn-primary">Valider</button>
+        <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post" class="container my-5">
+            <h1 class="border-top py-4">Modifier un film</h1>
+            <input type="hidden" placeholder="Titre du film" name="id" class="form-control" value="<?= $movie->getId() ?>">
+            <p>
+                <input type="text" placeholder="Titre du film" name="title" class="form-control" value="<?= $movie->getTitle() ?>">
+            </p>
+            <p>
+                <input type="text" placeholder="Numéro IMDB" name="imdb" class="form-control" value="<?= $movie->getImdb() ?>">
+            </p>
+            <select class="form-select mb-3" aria-label="Default select example" name="gender_id">
+                <!-- <option selected>Sélectionner le genre</option> -->
 
+                <<?php $all = Gender::all();
+                    foreach ($all as $a) :
+                        $a->getId() === $movie->getGender_id() ? $selected = "selected" : $selected = "";
+                    ?> <option <?= $selected ?> value="<?= $a->getId() ?>"><?= $a->getName() ?></option>
+                <?php endforeach ?>
+            </select>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" name="updateMovie">Valider</button>
+                <button type="submit" class="btn btn-danger" name="deleteMovie">Supprimer</button>
+            </div>
         </form>
     </main>
 

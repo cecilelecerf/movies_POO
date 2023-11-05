@@ -12,7 +12,7 @@ $last = array_pop($tFilepath);
                                     'class=' . $className . ' active"' :
                                     'class=' . $className . '"';
                                 ?>>
-                Tous les groupes
+                Tous les genres
             </a>
         </li>
         <li class="nav-item">
@@ -21,6 +21,14 @@ $last = array_pop($tFilepath);
                                         'class=' . $className . '"';
                                     ?>>
                 Tous les films
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="allCharacters.php" <?= ($last == "allCharacters.php") ?
+                                            'class=' . $className . ' active"' :
+                                            'class=' . $className . '"';
+                                        ?>>
+                Tous les personnages
             </a>
         </li>
 
@@ -48,15 +56,15 @@ $last = array_pop($tFilepath);
                                 <select class="form-select" aria-label="Default select example" name="gender_id">
                                     <option selected>Sélectionner le genre</option>
 
-                                    <?php $all = Gender::all();
-                                    foreach ($all as $a) :
+                                    <?php $tests = Gender::all();
+                                    foreach ($tests as $test) :
                                     ?>
-                                        <option value="<?= $a->getId() ?>"><?= $a->getName() ?></option>
+                                        <option value="<?= $test->getId() ?>"><?= $test->getName() ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                 <button type="submit" class="btn btn-primary" name="addMovie">Valider</button>
                             </div>
                         </form>

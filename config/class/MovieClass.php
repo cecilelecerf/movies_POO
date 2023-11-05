@@ -113,11 +113,11 @@ class Movie extends Database
         }
         return $tabResult;
     }
-    public static function allCondition($id)
+    public static function allCondition($gender_id)
     {
         $db = new Database;
         $req = $db->prepare("SELECT * FROM movies WHERE gender_id=:id");
-        $req->execute([":id" => $id]);
+        $req->execute([":id" => $gender_id]);
         $tabResult = [];
         $r = $req->fetchAll(PDO::FETCH_ASSOC);
         foreach ($r as $value) {
@@ -170,5 +170,6 @@ class Movie extends Database
     {
         $req = $this->prepare("DELETE FROM movies WHERE id=:id");
         $req->execute(["id" => $this->getId()]);
+        return true;
     }
 }
