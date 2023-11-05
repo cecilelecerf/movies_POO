@@ -1,0 +1,14 @@
+.allGender{
+    display: flex;
+    flex-wrap: wrap;
+}
+.gender:hover{
+    background-color: rgb(255, 215, 96) !important;
+}
+
+a.gender{
+    text-decoration-line: none !important;
+}
+.badge{
+    float: right;
+}

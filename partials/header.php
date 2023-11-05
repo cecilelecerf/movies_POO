@@ -16,19 +16,11 @@ $last = array_pop($tFilepath);
             </a>
         </li>
         <li class="nav-item">
-            <a href="allStudents.php" <?= ($last == "allStudents.php") ?
-                                            'class=' . $className . ' active"' :
-                                            'class=' . $className . '"';
-                                        ?>>
-                Tous les étudiants
-            </a>
-        </li>
-        <li>
-            <a href="oneGroup.php?id=2" <?= ($last == "oneGroup.php?id=2") ?
-                                            'class=' . $className . ' active"' :
-                                            'class=' . $className . '"';
-                                        ?>>
-                Premier groupe
+            <a href="allMovies.php" <?= ($last == "allMovies.php") ?
+                                        'class=' . $className . ' active"' :
+                                        'class=' . $className . '"';
+                                    ?>>
+                Tous les films
             </a>
         </li>
     </ul>

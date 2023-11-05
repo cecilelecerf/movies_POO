@@ -15,42 +15,24 @@ require("config/settings.php");
 
     <?php include("partials/header.php") ?>
     <main>
-        <?php $all = Student::all();
+        <?php $all = Movie::all();
         ?>
-        <table class="table container">
+        <table class="table container table-hover">
             <thead>
                 <tr>
-
-                    <th>Id</th>
-                    <th>Creation</th>
-                    <th>Modification</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Anniversaire</th>
-                    <th>Spécialité</th>
-                    <th>Promo</th>
+                    <th>Titre</th>
+                    <th>IMDB</th>
+                    <th>Catégorie</th>
 
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($all as $a) :  ?>
-                    <tr>
-                        <td><?= $a->getId() ?></td>
-                        <td><?= $a->getCreated_at() ?></td>
-                        <td><?= $a->getModified_at() ?></td>
-                        <td>
-                            <a href="./oneStudent.php?id=<?= $a->getId() ?>">
-                                <?= $a->getFirstname() ?>
-                            </a>
-                        </td>
-                        <td><?= $a->getLastname() ?></td>
-                        <td><?= date_format(date_create($a->getBirthday()), "j F, Y"); ?></td>
-                        <td><?= !empty($a->getMajor()) ? $a->getMajor() : ""; ?></td>
-                        <td>
-                            <a href="./oneGroup.php?id=<?= $a->getPromo_id() ?>">
-                                <?= !empty($a->getPromo()) ? $a->getPromo()->getTitle() : ""; ?>
-                            </a>
-                        </td>
+                    <tr onClick="document.location.href='oneMovie.php?id=<?= $a->getId() ?>'">
+                        <td><?= $a->getTitle() ?> </td>
+                        <td><?= $a->getIMDB() ?></td>
+                        <td><?= $a->getGender()->getName() ?></td>
+
                     </tr>
 
                 <?php endforeach ?>

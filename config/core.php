@@ -1,39 +1,39 @@
 <?php
 if (!empty($_POST)) {
-    if (isset($_POST["addGroup"])) {
+    if (isset($_POST["addGender"])) {
         $_POST = array_map("trim", $_POST);
-        $new = new Group($_POST);
+        $new = new Gender($_POST);
         if ($new->isValid()) {
             $new->save();
-            flash_in("succes", "La promo est enregistrée");
+            flash_in("success", "Le genre est enregistré");
         }
         header("Location: index.php");
         exit();
     }
 
-    if (isset($_POST["addStudent"])) {
+    if (isset($_POST["addMovie"])) {
         $_POST = array_map("trim", $_POST);
-        $new = new Student($_POST);
+        $new = new Movie($_POST);
         if ($new->isValid()) {
             $new->save();
-            flash_in("succes", "L'élève est enregistré(e)");
+            flash_in("success", "Le film est enregistré");
         }
-        header("Location: allStudents.php");
+        header("Location: allMovies.php");
         exit();
     }
     if (isset($_POST["updateStudent"])) {
         $_POST = array_map("trim", $_POST);
-        $update = new Student($_POST);
+        $update = new Gender($_POST);
         if ($update->isValid()) {
             $update->save();
-            flash_in("succes", "L'élève est modifié(e)");
+            flash_in("success", "L'élève est modifié(e)");
         }
         header("Location: oneStudent.php?id=" . $_GET["id"]);
         exit();
     }
 
     if (isset($_POST["deleteStudent"])) {
-        $delete = new Student($_POST);
+        $delete = new Movie($_POST);
         if ($delete->delete())
             flash_in("succes", "L'élève est supprimé(e)");
         else

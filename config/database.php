@@ -2,7 +2,7 @@
 define("SQL_HOST", "localhost");
 define("SQL_USER", "root");
 define("SQL_PASS", "root");
-define("SQL_DBNAME", "b3_object_students");
+define("SQL_DBNAME", "b3_object_movies");
 class Database extends PDO
 {
     protected $connect = false;
