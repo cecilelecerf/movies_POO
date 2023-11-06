@@ -74,7 +74,7 @@ if (empty($gender->getId())) {
             </p>
             <div class="d-flex justify-content-between">
                 <button type="submit" name="updateGender" class="btn btn-primary">Valider</button>
-                <button type="submit" name="deleteGender" class="btn btn-danger">Supprimer</button>
+                <button type="submit" name="deleteGender" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce genre (cela supprimera les films et personnages reliés à celui-ci) ?')">Supprimer</button>
             </div>
         </form>
     </main>

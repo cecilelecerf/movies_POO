@@ -52,7 +52,7 @@ if (empty($character->getId())) {
             </select>
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary" name="updateCharacter">Valider</button>
-                <button type="submit" class="btn btn-danger" name="deleteCharacter">Supprimer</button>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnage ?')" name="deleteCharacter">Supprimer</button>
             </div>
         </form>
     </main>

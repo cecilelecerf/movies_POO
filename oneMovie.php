@@ -72,7 +72,7 @@ if (empty($movie->getId())) {
         </form>
 
         <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post" class="container my-5">
-            <h1 class="border-top py-4">Modifier un film</h1>
+            <h1 class="border-top py-4">Modifier le film</h1>
             <input type="hidden" placeholder="Titre du film" name="id" class="form-control" value="<?= $movie->getId() ?>">
             <p>
                 <input type="text" placeholder="Titre du film" name="title" class="form-control" value="<?= $movie->getTitle() ?>">
@@ -81,8 +81,6 @@ if (empty($movie->getId())) {
                 <input type="text" placeholder="Numéro IMDB" name="imdb" class="form-control" value="<?= $movie->getImdb() ?>">
             </p>
             <select class="form-select mb-3" aria-label="Default select example" name="gender_id">
-                <!-- <option selected>Sélectionner le genre</option> -->
-
                 <<?php $all = Gender::all();
                     foreach ($all as $a) :
                         $a->getId() === $movie->getGender_id() ? $selected = "selected" : $selected = "";
@@ -91,7 +89,7 @@ if (empty($movie->getId())) {
             </select>
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary" name="updateMovie">Valider</button>
-                <button type="submit" class="btn btn-danger" name="deleteMovie">Supprimer</button>
+                <button type="submit" class="btn btn-danger" name="deleteMovie" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnage ? (cela supprimera les personnages de ce film)')">Supprimer</button>
             </div>
         </form>
     </main>
